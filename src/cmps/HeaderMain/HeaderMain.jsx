@@ -1,14 +1,14 @@
 
 import './HeaderMain.scss'
 
-export  function HeaderMain({onContactPage}) {
+export  function HeaderMain({onPage}) {
     return (
         <header>
             <div className="logo">BITCoin.</div>
             <nav>
-                <div onClick={() => onContactPage('isHomePage')}>Home</div>
-                <div onClick={() => onContactPage('isContactPage')}>Contacts</div>
-                <div onClick={() => onContactPage('isStatisticPage')}>Statistics</div>
+                <div onClick={() => onPage('isHomePage')}>Home</div>
+                <div onClick={() => onPage('isContactPage')}>Contacts</div>
+                <div onClick={() => onPage('isStatisticPage')}>Statistics</div>
             </nav>
         </header>
     )

@@ -2,6 +2,7 @@
 import { Component } from 'react'
 import { HeaderMain } from '../../cmps/HeaderMain/HeaderMain'
 import { userService } from '../../services/userService'
+import { bitcoinService } from '../../services/bitcoinService'
 import { ContactPage } from '../ContactPage/ContactPage'
 import { StatisticPage } from '../StatisticPage/StatisticPage'
 
@@ -10,6 +11,7 @@ import './HomePage.scss'
 export class HomePage extends Component {
     state = {
         user: null,
+        rate: null,
         isHomePage: true,
         isContactPage: false,
         isStatisticPage: false
@@ -17,6 +19,7 @@ export class HomePage extends Component {
 
     componentDidMount() {
         this.loadUser()
+        this.loadRate()
     }
 
     async loadUser() {
@@ -24,22 +27,28 @@ export class HomePage extends Component {
         this.setState({ user })
     }
 
-    onContactPage = (page) => {
+    async loadRate() {
+        const user = await userService.getUser();
+        const rate = await bitcoinService.getRate(user.coins)
+        this.setState({ rate })
+    }
+
+    onPage = (page) => {
         if (page === 'isHomePage') this.setState({ isHomePage: true, isContactPage: false, isStatisticPage: false })
         else if (page === 'isContactPage') this.setState({ isHomePage: false, isContactPage: true, isStatisticPage: false })
         else this.setState({ isHomePage: false, isContactPage: false, isStatisticPage: true })
     }
 
     render() {
-        const { user, isHomePage, isContactPage, isStatisticPage } = this.state
+        const { user, rate, isHomePage, isContactPage, isStatisticPage } = this.state
         return (
             user && <div className="home-page">
-                <HeaderMain onContactPage={this.onContactPage} />
+                <HeaderMain onPage={this.onPage} />
                 {isHomePage && ( 
                     <div className="user-container">
                         <h2>Hello { user.name }!</h2>
                         <div>Coins: { user.coins }</div>
-                        <div>BTC: </div>
+                        {rate && <div>BTC: {rate}</div>}
                     </div>
                 )}
                 {isContactPage && <ContactPage />}

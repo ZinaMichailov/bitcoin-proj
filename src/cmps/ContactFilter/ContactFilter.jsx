@@ -20,8 +20,8 @@ export class ContactFilter extends Component {
         const { term } = this.state
         return (
             <form className="contact-filter" onSubmit={(ev) => ev.preventDefault()}>
-                <label htmlFor="term">Search</label>
-                <input type="text" id="term" name="term" value={term} onChange={this.handleChange} />
+                <label htmlFor="search">Search</label>
+                <input type="text" id="search" name="term" value={term} onChange={this.handleChange} />
             </form>
         )
     }
