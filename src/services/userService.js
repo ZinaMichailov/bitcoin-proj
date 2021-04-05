@@ -1,4 +1,4 @@
-export default {
+export const userService = {
     getUser
 }
 
@@ -9,5 +9,6 @@ const user = {
 }
 
 function getUser() {
-    return user
+    const userCopy = JSON.parse(JSON.stringify(user))
+    return Promise.resolve(userCopy)
 }
