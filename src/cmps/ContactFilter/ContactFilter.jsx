@@ -17,7 +17,7 @@ export class ContactFilter extends Component {
     }
 
     render() {
-        const { name, phone, email, term } = this.state
+        const { term } = this.state
         return (
             <form className="contact-filter" onSubmit={(ev) => ev.preventDefault()}>
                 <label htmlFor="term">Search</label>

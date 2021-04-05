@@ -3,6 +3,7 @@ import { Component } from 'react'
 import { contactService } from '../../services/contactService'
 import { ContactList } from '../../cmps/ContactList'
 import { ContactFilter } from '../../cmps/ContactFilter'
+import { ContactDetailsPage } from '../ContactDetailsPage'
 
 import './ContactPage.scss'
 
@@ -43,6 +44,7 @@ export class ContactPage extends Component {
                 <h2>Contacts</h2>
                 {!selectedContactId && <ContactFilter onChangeFilter={this.onChangeFilter} />}
                 {!selectedContactId && <ContactList onSelectContact={this.onSelectContact} contacts={contacts} />}
+                {selectedContactId && <ContactDetailsPage onDeleteContact={this.onDeleteContact} selectedContactId={selectedContactId} />}
             </div>
         )
     }
