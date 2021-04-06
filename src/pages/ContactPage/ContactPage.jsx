@@ -26,12 +26,6 @@ export class ContactPage extends Component {
         this.setState({ filterBy }, this.loadContacts)
     }
 
-    onDeleteContact = async (contactId) => {
-        await contactService.deleteContact(contactId)
-        this.loadContacts()
-        // this.props.history.push('/contact')
-    }
-
     render() {
         const { contacts } = this.state
         return (

@@ -1,6 +1,6 @@
 .contact-edit-page {
     padding-top: 30px;
-    > * {
+    form > * {
         margin-bottom: 20px;
         display: flex;
         justify-content: center;
@@ -9,6 +9,7 @@
         margin-right: 10px;
     }
     button {
+        display: block;
         margin: 0 auto 20px;
     }
 }

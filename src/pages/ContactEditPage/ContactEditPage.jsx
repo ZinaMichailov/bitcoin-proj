@@ -34,28 +34,36 @@ export class ContactEditPage extends Component {
         this.props.history.push('/contact')
     }
 
+    onDeleteContact = async () => {
+        await contactService.deleteContact(this.state.contact._id)
+        this.props.history.push('/contact')
+    }
+
     render() {
         if (!this.state.contact) return <div>{this.state.errMsg || 'Loading...'}</div>
-        const { name, email, phone } = this.state.contact
+        const { name, email, phone, _id } = this.state.contact
         return (
-            <form className="contact-edit-page" onSubmit={this.onSaveContact}>
-                <div>
-                    <label htmlFor="name">Name:</label>
-                    <input required type="text" id="name" value={name} onChange={this.handleChange} name="name" />
-                </div>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input required type="email" id="email" value={email} onChange={this.handleChange} name="email" />
-                </div>
-                <div>
-                    <label htmlFor="phone">Phone:</label>
-                    <input required type="text" id="phone" value={phone} onChange={this.handleChange} name="phone" />
-                </div>
+            <div className="contact-edit-page">
+                <form onSubmit={this.onSaveContact}>
+                    <div>
+                        <label htmlFor="name">Name:</label>
+                        <input required type="text" id="name" value={name} onChange={this.handleChange} name="name" />
+                    </div>
+                    <div>
+                        <label htmlFor="email">Email:</label>
+                        <input required type="email" id="email" value={email} onChange={this.handleChange} name="email" />
+                    </div>
+                    <div>
+                        <label htmlFor="phone">Phone:</label>
+                        <input required type="text" id="phone" value={phone} onChange={this.handleChange} name="phone" />
+                    </div>
 
-                <p>{this.state.errMsg}</p>
-                <button>Save Contact</button>
+                    <p>{this.state.errMsg}</p>
+                    <button>Save Contact</button>
+                </form>
+                {_id && <button onClick={this.onDeleteContact}>Delete</button>}
                 <button><Link to="/contact">Back</Link></button>
-            </form>
+            </div>
         )
     }
 }
