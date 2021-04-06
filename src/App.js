@@ -4,6 +4,7 @@ import { HomePage } from './pages/HomePage/HomePage';
 import { ContactPage } from './pages/ContactPage/ContactPage';
 import { StatisticPage } from './pages/StatisticPage/StatisticPage';
 import { ContactDetailsPage } from './pages/ContactDetailsPage';
+import { ContactEditPage } from './pages/ContactEditPage/ContactEditPage';
 import './App.scss';
 
 export function App() {
@@ -12,7 +13,7 @@ export function App() {
       <div className="App">
         <HeaderMain />
         <Switch>
-          {/* <Route component={ContactEditPage} path='/contact/edit/:id?' /> */}
+          <Route component={ContactEditPage} path='/contact/edit/:id?' />
           <Route component={ContactDetailsPage} path='/contact/:id' />
           <Route component={ContactPage} path='/contact' />
           <Route component={StatisticPage} path='/statistic' />

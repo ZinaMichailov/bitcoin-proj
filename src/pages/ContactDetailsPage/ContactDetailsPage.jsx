@@ -33,6 +33,7 @@ export class ContactDetailsPage extends Component {
                 <h3>{contact.name}</h3>
                 <p>Email: {contact.email}</p>
                 <p>Phone: {contact.phone}</p>
+                <button><Link to={'/contact/edit/' + contact._id}>Edit</Link></button>
                 <button onClick={() => this.props.onDeleteContact(contact._id)}>Delete</button>
                 <button><Link to="/contact">Back</Link></button>
             </div>

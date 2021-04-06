@@ -1,5 +1,6 @@
 
 import { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { contactService } from '../../services/contactService'
 import { ContactList } from '../../cmps/ContactList'
 import { ContactFilter } from '../../cmps/ContactFilter'
@@ -28,6 +29,7 @@ export class ContactPage extends Component {
     onDeleteContact = async (contactId) => {
         await contactService.deleteContact(contactId)
         this.loadContacts()
+        // this.props.history.push('/contact')
     }
 
     render() {
@@ -35,7 +37,8 @@ export class ContactPage extends Component {
         return (
             <div className="contact-page">
                 <ContactFilter onChangeFilter={this.onChangeFilter} />
-                <ContactList onSelectContact={this.onSelectContact} contacts={contacts} />
+                <ContactList contacts={contacts} />
+                <button><Link to="/contact/edit">Add Contact</Link></button>
             </div>
         )
     }
