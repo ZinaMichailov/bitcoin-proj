@@ -3,6 +3,8 @@ import { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { contactService } from '../../services/contactService'
 import './ContactDetailsPage.scss'
+import backIcon from '../../assets/img/back.png'
+import editIcon from '../../assets/img/edit.png'
 
 export class ContactDetailsPage extends Component {
     state = {
@@ -29,12 +31,14 @@ export class ContactDetailsPage extends Component {
         if (!contact) return <div>Loading Contact...</div>
         return (
             <div className="contact-details-page">
+                <div className="actions">
+                    <Link to="/contact"><img src={backIcon} alt=""/></Link>
+                    <Link to={'/contact/edit/' + contact._id}><img src={editIcon} alt=""/></Link>
+                </div>
                 <img src={`https://robohash.org/${contact._id}`} alt="" />
                 <h3>{contact.name}</h3>
                 <p>Email: {contact.email}</p>
                 <p>Phone: {contact.phone}</p>
-                <button><Link to={'/contact/edit/' + contact._id}>Edit</Link></button>
-                <button><Link to="/contact">Back</Link></button>
             </div>
         )
     }

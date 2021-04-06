@@ -44,6 +44,10 @@ export class ContactEditPage extends Component {
         const { name, email, phone, _id } = this.state.contact
         return (
             <div className="contact-edit-page">
+                <div>
+                    {_id && <button onClick={this.onDeleteContact}>Delete</button>}
+                    <button><Link to="/contact">Back</Link></button>
+                </div>
                 <form onSubmit={this.onSaveContact}>
                     <div>
                         <label htmlFor="name">Name:</label>
@@ -61,8 +65,6 @@ export class ContactEditPage extends Component {
                     <p>{this.state.errMsg}</p>
                     <button>Save Contact</button>
                 </form>
-                {_id && <button onClick={this.onDeleteContact}>Delete</button>}
-                <button><Link to="/contact">Back</Link></button>
             </div>
         )
     }

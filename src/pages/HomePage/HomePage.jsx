@@ -2,6 +2,8 @@
 import { Component } from 'react'
 import { userService } from '../../services/userService'
 import { bitcoinService } from '../../services/bitcoinService'
+import coinsIcon from '../../assets/img/coins.png'
+import bitcoinIcon from '../../assets/img/bitcoin.png'
 
 import './HomePage.scss'
 
@@ -38,8 +40,14 @@ export class HomePage extends Component {
             user && <div className="home-page">
                 <div className="user-container">
                     <h2>Hello {user.name}!</h2>
-                    <div>Coins: {user.coins}</div>
-                    {rate && <div>BTC: {this.rateFormatted}</div>}
+                    <div className="flex">
+                        <img src={coinsIcon} alt="" /> 
+                        <div>Coins: {user.coins}</div> 
+                    </div>
+                    {rate && <div className="flex">
+                        <img src={bitcoinIcon} alt="" /> 
+                        <div>BTC: {this.rateFormatted}</div> 
+                    </div>}
                 </div>
             </div>
         )
