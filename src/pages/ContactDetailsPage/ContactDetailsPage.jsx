@@ -1,7 +1,8 @@
 
 import { Component } from 'react'
-import './ContactDetailsPage.scss'
+import { Link } from 'react-router-dom'
 import { contactService } from '../../services/contactService'
+import './ContactDetailsPage.scss'
 
 export class ContactDetailsPage extends Component {
     state = {
@@ -13,8 +14,14 @@ export class ContactDetailsPage extends Component {
     }
 
     async loadContact() {
-        const contact = await contactService.getContactById(this.props.selectedContactId)
+        const contact = await contactService.getContactById(this.props.match.params.id)
         this.setState({ contact })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.match.params.id !== this.props.match.params.id) {
+            this.loadContact()
+        }
     }
 
     render() {
@@ -27,6 +34,7 @@ export class ContactDetailsPage extends Component {
                 <p>Email: {contact.email}</p>
                 <p>Phone: {contact.phone}</p>
                 <button onClick={() => this.props.onDeleteContact(contact._id)}>Delete</button>
+                <button><Link to="/contact">Back</Link></button>
             </div>
         )
     }

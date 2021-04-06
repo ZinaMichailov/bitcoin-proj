@@ -1,14 +1,15 @@
 
+import { NavLink } from 'react-router-dom'
 import './HeaderMain.scss'
 
-export  function HeaderMain({onPage}) {
+export  function HeaderMain() {
     return (
         <header>
             <div className="logo">BITCoin.</div>
             <nav>
-                <div onClick={() => onPage('isHomePage')}>Home</div>
-                <div onClick={() => onPage('isContactPage')}>Contacts</div>
-                <div onClick={() => onPage('isStatisticPage')}>Statistics</div>
+                <div><NavLink exact to="/" activeClassName="active-nav">Home</NavLink></div>
+                <div><NavLink to="/contact" activeClassName="active-nav">Contacts</NavLink></div>
+                <div><NavLink to="/statistic" activeClassName="active-nav">Statistics</NavLink></div>
             </nav>
         </header>
     )
