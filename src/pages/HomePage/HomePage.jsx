@@ -19,17 +19,15 @@ export class HomePage extends Component {
 
     componentDidMount() {
         this.loadUser()
-        this.loadRate()
     }
 
     async loadUser() {
         const user = await userService.getUser()
-        this.setState({ user })
+        this.setState({ user }, this.loadRate)
     }
 
     async loadRate() {
-        const user = await userService.getUser();
-        const rate = await bitcoinService.getRate(user.coins)
+        const rate = await bitcoinService.getRate(this.state.user.coins)
         this.setState({ rate })
     }
 

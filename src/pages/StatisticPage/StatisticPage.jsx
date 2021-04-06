@@ -23,8 +23,15 @@ export class StatisticPage extends Component {
 
     async loadTradeVolume() {
         const tradeVolume = await bitcoinService.getConfirmedTransactions()
-        console.log(tradeVolume);
         this.setState({ tradeVolume })
+    }
+
+    get marketPriceValues() {
+        return this.state.marketPrice.values.map(pos => pos.y)
+    }
+
+    get tradeVolumeValues() {
+        return this.state.tradeVolume.values.map(pos => pos.y)
     }
 
     render() {
@@ -33,17 +40,17 @@ export class StatisticPage extends Component {
             <div className="statistic-page">
                 <h2>statistics</h2>
                 {marketPrice && (
-                    <div>
-                        <h4>{marketPrice.name}</h4>
+                    <div className="price-chart">
+                        <h3>{marketPrice.name}</h3>
+                        <Chart values={this.marketPriceValues} />
                         <p>{marketPrice.description}</p>
-                        {/* <Chart values={marketPrice.values} /> */}
                     </div>
                 )}
                 {tradeVolume && (
-                    <div>
-                        <h4>{tradeVolume.name}</h4>
+                    <div className="trade-chart">
+                        <h3>{tradeVolume.name}</h3>
+                        <Chart values={this.tradeVolumeValues} />
                         <p>{tradeVolume.description}</p>
-                        {/* <Chart values={tradeVolume.values} /> */}
                     </div>
                 )}
             </div>

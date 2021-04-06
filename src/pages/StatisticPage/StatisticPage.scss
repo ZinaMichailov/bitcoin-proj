@@ -1,5 +1,12 @@
 .statistic-page {
-    h2 {
-        text-align: center;
+    padding-top: 30px;
+    text-align: center;
+
+    .trade-chart, .price-chart {
+        max-width: 700px;
+        margin: 50px auto;
+        p {
+            max-width: none;
+        }
     }
 }
