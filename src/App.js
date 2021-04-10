@@ -1,7 +1,7 @@
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { HeaderMain } from './cmps/HeaderMain/HeaderMain';
 import { HomePage } from './pages/HomePage/HomePage';
-import { ContactPage } from './pages/ContactPage/ContactPage';
+import { ContactPage } from './pages/ContactPage';
 import { StatisticPage } from './pages/StatisticPage/StatisticPage';
 import { ContactDetailsPage } from './pages/ContactDetailsPage';
 import { ContactEditPage } from './pages/ContactEditPage/ContactEditPage';

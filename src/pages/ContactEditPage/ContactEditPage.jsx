@@ -1,11 +1,13 @@
 
 import { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { contactService } from '../../services/contactService'
+import { saveContact, removeContact } from '../../store/actions/contactAction'
 
 import './ContactEditPage.scss'
 
-export class ContactEditPage extends Component {
+class _ContactEditPage extends Component {
     state = {
         contact: null,
         errMsg: ''
@@ -30,12 +32,12 @@ export class ContactEditPage extends Component {
     onSaveContact = async (ev) => {
         ev.preventDefault()
         console.log(this.state.contact);
-        await contactService.saveContact({ ...this.state.contact })
+        await this.props.saveContact({ ...this.state.contact })
         this.props.history.push('/contact')
     }
 
     onDeleteContact = async () => {
-        await contactService.deleteContact(this.state.contact._id)
+        await this.props.removeContact(this.state.contact._id)
         this.props.history.push('/contact')
     }
 
@@ -69,3 +71,11 @@ export class ContactEditPage extends Component {
         )
     }
 }
+
+
+const mapDispatchToProps = {
+    saveContact,
+    removeContact
+}
+
+export const ContactEditPage = connect(null, mapDispatchToProps)(_ContactEditPage)

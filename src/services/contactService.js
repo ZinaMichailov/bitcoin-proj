@@ -3,7 +3,7 @@ import { storageService } from "./storageService";
 export const contactService =  {
   getContacts,
   getContactById,
-  deleteContact,
+  removeContact,
   saveContact,
   getEmptyContact
 }
@@ -155,7 +155,7 @@ function getContactById(id) {
   })
 }
 
-function deleteContact(id) {
+function removeContact(id) {
   return new Promise((resolve, reject) => {
     const index = gContacts.findIndex(contact => contact._id === id)
     if (index !== -1) {

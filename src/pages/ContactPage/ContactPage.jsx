@@ -1,25 +1,22 @@
 
 import { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { contactService } from '../../services/contactService'
+import { connect } from 'react-redux'
 import { ContactList } from '../../cmps/ContactList'
 import { ContactFilter } from '../../cmps/ContactFilter'
+import { loadContacts } from '../../store/actions/contactAction'
 
 import './ContactPage.scss'
 
-export class ContactPage extends Component {
+class _ContactPage extends Component {
     state = {
-        contacts: null,
+        // contacts: null,
         filterBy: null
     }
 
     componentDidMount() {
-        this.loadContacts()
-    }
-
-    async loadContacts() {
-        const contacts = await contactService.getContacts(this.state.filterBy)
-        this.setState({ contacts })
+        console.log(this.props);
+        this.props.loadContacts(this.state.filterBy)
     }
 
     onChangeFilter = (filterBy) => {
@@ -27,7 +24,7 @@ export class ContactPage extends Component {
     }
 
     render() {
-        const { contacts } = this.state
+        const { contacts } = this.props
         return (
             <div className="contact-page">
                 <ContactFilter onChangeFilter={this.onChangeFilter} />
@@ -37,3 +34,15 @@ export class ContactPage extends Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        contacts: state.contactReducer.contacts
+    }
+}
+
+const mapDispatchToProps = {
+    loadContacts
+}
+
+export const ContactPage = connect(mapStateToProps, mapDispatchToProps)(_ContactPage)
