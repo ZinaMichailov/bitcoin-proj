@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { contactService } from '../../services/contactService'
 import { saveContact, removeContact } from '../../store/actions/contactAction'
-
+import backIcon from '../../assets/img/back.png'
+import deleteIcon from '../../assets/img/delete.png'
 import './ContactEditPage.scss'
 
 class _ContactEditPage extends Component {
@@ -31,7 +32,6 @@ class _ContactEditPage extends Component {
 
     onSaveContact = async (ev) => {
         ev.preventDefault()
-        console.log(this.state.contact);
         await this.props.saveContact({ ...this.state.contact })
         this.props.history.push('/contact')
     }
@@ -46,9 +46,9 @@ class _ContactEditPage extends Component {
         const { name, email, phone, _id } = this.state.contact
         return (
             <div className="contact-edit-page">
-                <div>
-                    {_id && <button onClick={this.onDeleteContact}>Delete</button>}
-                    <button><Link to="/contact">Back</Link></button>
+                <div className="actions">
+                    <Link to="/contact"><img src={backIcon} alt=""/></Link>
+                    {_id && <button onClick={this.onDeleteContact}><img src={deleteIcon} alt=""/></button>}
                 </div>
                 <form onSubmit={this.onSaveContact}>
                     <div>
@@ -65,7 +65,7 @@ class _ContactEditPage extends Component {
                     </div>
 
                     <p>{this.state.errMsg}</p>
-                    <button>Save Contact</button>
+                    <button className="btn save-btn">Save Contact</button>
                 </form>
             </div>
         )

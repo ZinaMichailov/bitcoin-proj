@@ -13,12 +13,12 @@ class _ContactDetailsPage extends Component {
     // }
 
     componentDidMount() {
-        this.props.getRobotById(this.props.match.params.id)
+        this.props.getContactById(this.props.match.params.id)
     }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
-            this.props.getRobotById(this.props.match.params.id)
+            this.props.getContactById(this.props.match.params.id)
         }
     }
 

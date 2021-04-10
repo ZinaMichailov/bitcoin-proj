@@ -15,12 +15,13 @@ class _ContactPage extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props);
         this.props.loadContacts(this.state.filterBy)
     }
 
     onChangeFilter = (filterBy) => {
-        this.setState({ filterBy }, this.loadContacts)
+        this.setState({ filterBy }, () => {
+            this.props.loadContacts(this.state.filterBy)
+        })
     }
 
     render() {
@@ -29,7 +30,7 @@ class _ContactPage extends Component {
             <div className="contact-page">
                 <ContactFilter onChangeFilter={this.onChangeFilter} />
                 <ContactList contacts={contacts} />
-                <button><Link to="/contact/edit">Add Contact</Link></button>
+                <button className="btn"><Link to="/contact/edit">Add Contact</Link></button>
             </div>
         )
     }

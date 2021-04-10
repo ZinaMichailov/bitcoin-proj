@@ -21,6 +21,7 @@ export function getContactById(contactId) {
 
 export function saveContact(contact) {
   return async dispatch => {
+    console.log(contact);
     const isAdd = !contact._id
     const updatedContact = await contactService.saveContact(contact)
 
