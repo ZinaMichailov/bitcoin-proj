@@ -2,6 +2,7 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { bitcoinService } from '../../services/bitcoinService'
+import { MovesList } from '../../cmps/MovesList/MovesList'
 import coinsIcon from '../../assets/img/coins.png'
 import bitcoinIcon from '../../assets/img/bitcoin.png'
 
@@ -45,6 +46,7 @@ class _HomePage extends Component {
                             <img src={bitcoinIcon} alt="" /> 
                             <div>BTC: {this.rateFormatted}</div> 
                         </div>}
+                        <MovesList moves={loggedinUser.moves}/>
                     </div>
                 )}
                 {!loggedinUser && <div>go to login / sing up</div>}
@@ -59,10 +61,4 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = {
-    // login,
-    // signup,
-    // logout
-}
-
-export const HomePage = connect(mapStateToProps, mapDispatchToProps)(_HomePage)
+export const HomePage = connect(mapStateToProps)(_HomePage)

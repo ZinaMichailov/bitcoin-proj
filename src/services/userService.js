@@ -17,7 +17,14 @@ const users = [
         email: 'puki@gmail.com',
         password: '1234',
         coins: 100,
-        moves: []
+        moves: [
+            {
+                toId: '5a56640269f443a5d64b32ca',
+                to: 'Ochoa Hyde',
+                at: 1618056214923,
+                amount: 20
+            }
+        ]
     }
 ]
 
@@ -70,7 +77,9 @@ function addMove(contact, amount) {
     move.to = contact.name
     move.amount = amount
     gUsers[userIdx].moves.push(move)
-    storageService.store(USER_KEY, gUsers);
+    gUsers[userIdx].coins -= amount
+    storageService.store(USER_KEY, gUsers)
+    return gUsers[userIdx]
 }
 
 function getEmptyUserMove() {

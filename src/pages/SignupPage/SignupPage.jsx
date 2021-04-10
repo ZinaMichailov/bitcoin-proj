@@ -19,15 +19,15 @@ class _SignupPage extends Component {
         this.setState({ [field]: value })
     }
 
-    setLogin(ev) {
+    async setLogin(ev) {
         ev.preventDefault()
-        this.props.login({ ...this.state })
+        await this.props.login({ ...this.state })
         this.props.history.push('/')
     }
 
-    setSingUp(ev) {
+    async setSingUp(ev) {
         ev.preventDefault()
-        this.props.signup({ ...this.state })
+        await this.props.signup({ ...this.state })
         this.props.history.push('/')
     }
 

@@ -24,8 +24,14 @@ export function signup(userCred) {
 
 export function logout() {
     return async dispatch => {
-        console.log('logout');
         await userService.logout()
         dispatch({ type: 'LOGOUT'})
+    }
+}
+
+export function addMove(contact, amount) {
+    return async dispatch => {
+        const user = await userService.addMove(contact, amount)
+        dispatch({ type: 'ADD_MOVE', user})
     }
 }

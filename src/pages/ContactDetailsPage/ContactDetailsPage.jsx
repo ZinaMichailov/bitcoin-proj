@@ -3,14 +3,13 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getContactById } from '../../store/actions/contactAction'
+import { MovesList } from '../../cmps/MovesList'
+import { TransferFund } from '../../cmps/TransferFund/TransferFund'
 import './ContactDetailsPage.scss'
 import backIcon from '../../assets/img/back.png'
 import editIcon from '../../assets/img/edit.png'
 
 class _ContactDetailsPage extends Component {
-    // state = {
-    //     contact: null
-    // }
 
     componentDidMount() {
         this.props.getContactById(this.props.match.params.id)
@@ -20,6 +19,11 @@ class _ContactDetailsPage extends Component {
         if (prevProps.match.params.id !== this.props.match.params.id) {
             this.props.getContactById(this.props.match.params.id)
         }
+    }
+
+    get movesForContact() {
+        if (!this.props.loggedinUser) return []
+        return this.props.loggedinUser.moves.filter(move => move.toId === this.props.match.params.id)
     }
 
     render() {
@@ -35,13 +39,16 @@ class _ContactDetailsPage extends Component {
                 <h3>{contact.name}</h3>
                 <p>Email: {contact.email}</p>
                 <p>Phone: {contact.phone}</p>
+                <TransferFund contact={contact} />
+                <MovesList moves={this.movesForContact}/>
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    contact: state.contactReducer.currContact
+    contact: state.contactReducer.currContact,
+    loggedinUser: state.userReducer.loggedinUser
 })
 
 const mapDispatchToProps = {

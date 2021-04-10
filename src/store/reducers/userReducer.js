@@ -27,6 +27,11 @@ export function userReducer(state = INITIAL_STATE, action) {
                 ...state,
                 loggedinUser: null
             }
+        case 'ADD_MOVE':
+            return {
+                ...state,
+                loggedinUser: action.user
+            }
         default:
             return state
     }
