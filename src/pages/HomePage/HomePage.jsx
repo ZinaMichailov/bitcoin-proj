@@ -1,29 +1,24 @@
 
 import { Component } from 'react'
-import { userService } from '../../services/userService'
+import { connect } from 'react-redux'
 import { bitcoinService } from '../../services/bitcoinService'
 import coinsIcon from '../../assets/img/coins.png'
 import bitcoinIcon from '../../assets/img/bitcoin.png'
 
 import './HomePage.scss'
 
-export class HomePage extends Component {
+class _HomePage extends Component {
     state = {
-        user: null,
         rate: null
     }
 
     componentDidMount() {
-        this.loadUser()
-    }
-
-    async loadUser() {
-        const user = await userService.getUser()
-        this.setState({ user }, this.loadRate)
+        this.loadRate()
     }
 
     async loadRate() {
-        const rate = await bitcoinService.getRate(this.state.user.coins)
+        if (!this.props.loggedinUser) return
+        const rate = await bitcoinService.getRate(this.props.loggedinUser.coins)
         this.setState({ rate })
     }
 
@@ -35,21 +30,39 @@ export class HomePage extends Component {
     }
 
     render() {
-        const { user, rate } = this.state
+        const { rate } = this.state
+        const { loggedinUser } = this.props
         return (
-            user && <div className="home-page">
-                <div className="user-container">
-                    <h2>Hello {user.name}!</h2>
-                    <div className="flex">
-                        <img src={coinsIcon} alt="" /> 
-                        <div>Coins: {user.coins}</div> 
+            <div className="home-page">
+                {loggedinUser && (
+                    <div className="user-container">
+                        <h2>Hello {loggedinUser.name}!</h2>
+                        <div className="flex">
+                            <img src={coinsIcon} alt="" /> 
+                            <div>Coins: {loggedinUser.coins}</div> 
+                        </div>
+                        {rate && <div className="flex">
+                            <img src={bitcoinIcon} alt="" /> 
+                            <div>BTC: {this.rateFormatted}</div> 
+                        </div>}
                     </div>
-                    {rate && <div className="flex">
-                        <img src={bitcoinIcon} alt="" /> 
-                        <div>BTC: {this.rateFormatted}</div> 
-                    </div>}
-                </div>
+                )}
+                {!loggedinUser && <div>go to login / sing up</div>}
             </div>
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        loggedinUser: state.userReducer.loggedinUser
+    }
+}
+
+const mapDispatchToProps = {
+    // login,
+    // signup,
+    // logout
+}
+
+export const HomePage = connect(mapStateToProps, mapDispatchToProps)(_HomePage)

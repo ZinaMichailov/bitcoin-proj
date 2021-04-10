@@ -10,7 +10,7 @@ export class ContactFilter extends Component {
 
     handleChange = ({ target }) => {
         const field = target.name
-        const value = target.value
+        const value = target.type === 'number' ? +target.value : target.value
         this.setState({ [field]: value }, () => {
             this.props.onChangeFilter({ ...this.state })
         })

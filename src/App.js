@@ -5,6 +5,7 @@ import { ContactPage } from './pages/ContactPage';
 import { StatisticPage } from './pages/StatisticPage/StatisticPage';
 import { ContactDetailsPage } from './pages/ContactDetailsPage';
 import { ContactEditPage } from './pages/ContactEditPage/ContactEditPage';
+import { SignupPage } from './pages/SignupPage/SignupPage';
 import './App.scss';
 
 export function App() {
@@ -17,6 +18,7 @@ export function App() {
           <Route component={ContactDetailsPage} path='/contact/:id' />
           <Route component={ContactPage} path='/contact' />
           <Route component={StatisticPage} path='/statistic' />
+          <Route component={SignupPage} path='/signup' />
           <Route component={HomePage} path='/' />
         </Switch>
       </div>

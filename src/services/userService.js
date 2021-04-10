@@ -2,6 +2,7 @@ import { storageService } from "./storageService";
 
 export const userService = {
     getUser,
+    getUsers,
     login,
     signup,
     logout,
@@ -30,8 +31,12 @@ function getUser() {
     return Promise.resolve(userCopy)
 }
 
-function login(userCred) {
-    const user = gUsers.find(user => user.email === userCred.email && user.password === userCred.password)
+async function getUsers() {
+    return gUsers
+}
+
+function login(loginCred) {
+    const user = gUsers.find(user => user.email === loginCred.email && user.password === loginCred.password)
     return _saveLocalUser(user)
 }
 
@@ -40,6 +45,8 @@ function logout() {
 }
 
 function signup(signupCred) {
+    signupCred.coins = 100
+    signupCred.moves = []
     gUsers.push(signupCred)
     storageService.store(USER_KEY, gUsers)
     return _saveLocalUser(signupCred)
@@ -50,7 +57,7 @@ function getEmptySingUpCred() {
         name: '',
         email: '',
         password: '',
-        coins: 0,
+        coins: 100,
         moves: []
     }
 }
