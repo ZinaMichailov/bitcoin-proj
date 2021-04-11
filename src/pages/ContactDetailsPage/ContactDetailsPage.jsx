@@ -35,7 +35,7 @@ class _ContactDetailsPage extends Component {
                     <Link to="/contact"><img src={backIcon} alt=""/></Link>
                     <Link to={'/contact/edit/' + contact._id}><img src={editIcon} alt=""/></Link>
                 </div>
-                <img src={`https://robohash.org/${contact._id}`} alt="" />
+                <img src={`https://i.pravatar.cc/150?u=${contact._id}`} alt="" />
                 <h3>{contact.name}</h3>
                 <p>Email: {contact.email}</p>
                 <p>Phone: {contact.phone}</p>
